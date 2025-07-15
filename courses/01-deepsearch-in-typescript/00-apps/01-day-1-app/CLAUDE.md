@@ -5,17 +5,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Commands
 
 **Setup:**
+
 - `pnpm install` - Install dependencies
 - `./start-database.sh` - Start PostgreSQL database (requires Docker)
 - `./start-redis.sh` - Start Redis server (requires Docker)
 
 **Development:**
+
 - `pnpm dev` - Start Next.js development server with Turbo
 - `pnpm build` - Build production version
 - `pnpm start` - Start production server
 - `pnpm preview` - Build and start production server
 
 **Code Quality:**
+
 - `pnpm check` - Run linting and type checking
 - `pnpm lint` - ESLint only
 - `pnpm lint:fix` - Fix auto-fixable lint issues
@@ -24,6 +27,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `pnpm format:check` - Check code formatting
 
 **Database:**
+
 - `pnpm db:generate` - Generate Drizzle migrations
 - `pnpm db:migrate` - Run database migrations
 - `pnpm db:push` - Push schema changes directly to database
@@ -34,6 +38,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a Next.js 15 application for deep search functionality, built with the T3 stack pattern:
 
 **Core Stack:**
+
 - **Framework:** Next.js 15 with App Router and Turbo
 - **Database:** PostgreSQL with Drizzle ORM
 - **Caching:** Redis with ioredis
@@ -45,16 +50,19 @@ This is a Next.js 15 application for deep search functionality, built with the T
 **Key Architecture Patterns:**
 
 1. **Redis Caching Layer** (`src/server/redis/redis.ts`):
+
    - Generic `cacheWithRedis` wrapper function
    - 6-hour cache expiry for API calls
    - Used to cache Serper API responses
 
 2. **Database Schema** (`src/server/db/schema.ts`):
+
    - NextAuth.js adapter tables (users, accounts, sessions, verification tokens)
    - Multi-project schema with `ai-app-template_` prefix
    - TypeScript types exported via `DB` namespace
 
 3. **Search Integration** (`src/serper.ts`):
+
    - Serper API wrapper with TypeScript interfaces
    - Cached search results through Redis
    - Comprehensive type definitions for search responses
@@ -65,6 +73,7 @@ This is a Next.js 15 application for deep search functionality, built with the T
    - Session management with database persistence
 
 **Directory Structure:**
+
 - `src/app/` - Next.js App Router pages and API routes
 - `src/components/` - Reusable React components
 - `src/server/` - Server-side utilities (auth, database, Redis)
@@ -73,6 +82,7 @@ This is a Next.js 15 application for deep search functionality, built with the T
 ## Code Conventions
 
 Follow the established patterns from `.cursorrules`:
+
 - Use dash-case for file names (e.g., `auth-button.tsx`)
 - Prefer TypeScript over JavaScript
 - Use `import type { }` syntax for type-only imports
@@ -84,6 +94,7 @@ Follow the established patterns from `.cursorrules`:
 ## Environment Setup
 
 Required environment variables:
+
 - `SERPER_API_KEY` - For web search functionality
 - `REDIS_URL` - Redis connection string
 - `DISCORD_CLIENT_ID` and `DISCORD_CLIENT_SECRET` - For authentication
@@ -95,3 +106,4 @@ Required environment variables:
 - Chat functionality is currently a UI mockup (hardcoded messages)
 - Authentication is configured but may need additional provider setup
 - The app follows a chat interface pattern with sidebar navigation
+- Do not try to run the dev server or build the app, it requires logging in and typecheck should be sufficient.
