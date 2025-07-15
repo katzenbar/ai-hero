@@ -2,6 +2,7 @@ import ReactMarkdown, { type Components } from "react-markdown";
 import type { Message } from "ai";
 import { useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
+import { Source } from "./source";
 
 export type MessagePart = NonNullable<Message["parts"]>[number];
 
@@ -129,6 +130,8 @@ export const ChatMessage = ({ parts, role, userName }: ChatMessageProps) => {
                     toolInvocation={part.toolInvocation}
                   />
                 );
+              case "source":
+                return <Source key={index} part={part} />;
               default:
                 return null;
             }
